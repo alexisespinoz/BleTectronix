@@ -1,20 +1,46 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title class="ion-text-center">
+      Connectar Dispositivo
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <ion-button [disabled]="isScan" expand="block" fill="solid" size="default" color="secondary" (click)="listDevices()">
+    <ion-icon name="bluetooth" slot="start"></ion-icon>
+    Buscar dipositivos
+  </ion-button>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <ion-list>
+    <div *ngFor="let device of devices">
+      <ion-item lines="full" *ngIf="device.name">
+        <ion-label class="ion-text-wrap" >
+          {{ device.name}}
+        </ion-label>
+        <ion-button [disabled]="isConnectDevice" size="small" color="secondary" (click)="connect(device)">
+          <ion-icon name="bluetooth" slot="end"></ion-icon>
+          CONNECTAR
+        </ion-button>
+      </ion-item>
+    </div>
+  </ion-list>
+
+  <div *ngIf="devices.length > 0">
+    <ion-item>
+      <ion-label class="ion-text-wrap" *ngIf="deviceConnected">
+        Conectado con el dispositivo {{deviceConnected.name}}
+      </ion-label>
+    </ion-item>
+    
+    <ion-list *ngIf="responseDevice.length > 0">
+      <div *ngFor="let response of responseDevice">
+        <ion-item lines="full">
+          <ion-label class="ion-text-wrap">
+            {{ response }}
+          </ion-label>
+        </ion-item>
+      </div>
+    </ion-list>
   </div>
 </ion-content>
