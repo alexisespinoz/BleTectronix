@@ -1,5 +1,7 @@
 {
   "name": "BleTectronix",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
